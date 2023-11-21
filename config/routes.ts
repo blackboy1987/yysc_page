@@ -56,6 +56,12 @@ export default [
     redirect: '/welcome',
   },
   {
+    name: 'carousel',
+    icon: 'carousel',
+    path: '/carousel',
+    component: './carousel',
+  },
+  {
     path: '*',
     layout: false,
     component: './404',

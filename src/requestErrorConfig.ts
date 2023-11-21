@@ -1,6 +1,7 @@
 ﻿import type { RequestOptions } from '@@/plugin-request/request';
 import type { RequestConfig } from '@umijs/max';
 import { message, notification } from 'antd';
+import qs from 'qs';
 
 // 错误处理方案： 错误类型
 enum ErrorShowType {
@@ -72,15 +73,15 @@ export const errorConfig: RequestConfig = {
       } else if (error.response) {
         // Axios 的错误
         // 请求成功发出且服务器也响应了状态码，但状态代码超出了 2xx 的范围
-        message.error(`Response status:${error.response.status}`);
+        message.error(`Response status:${error.response.status}`).then();
       } else if (error.request) {
         // 请求已经成功发起，但没有收到响应
         // \`error.request\` 在浏览器中是 XMLHttpRequest 的实例，
         // 而在node.js中是 http.ClientRequest 的实例
-        message.error('None response! Please retry.');
+        message.error('None response! Please retry.').then();
       } else {
         // 发送请求时出了点问题
-        message.error('Request error, please retry.');
+        message.error('Request error, please retry.').then();
       }
     },
   },
@@ -89,20 +90,27 @@ export const errorConfig: RequestConfig = {
   requestInterceptors: [
     (config: RequestOptions) => {
       // 拦截请求配置，进行个性化处理。
-      const url = config?.url?.concat('?token = 123');
-      return { ...config, url };
+      const url = config?.url;
+      const headers = {
+        ...(config.headers || {}),
+      };
+      const newConfig = {
+        ...config,
+        headers: {
+          ...headers,
+          'content-type': 'application/x-www-form-urlencoded',
+          token: localStorage.getItem('token') || '',
+        },
+        withCredentials: true,
+        data: qs.stringify(config.data || {}),
+      };
+      return { ...newConfig, url };
     },
   ],
 
   // 响应拦截器
   responseInterceptors: [
     (response) => {
-      // 拦截响应数据，进行个性化处理
-      const { data } = response as unknown as ResponseStructure;
-
-      if (data?.success === false) {
-        message.error('请求失败！');
-      }
       return response;
     },
   ],
