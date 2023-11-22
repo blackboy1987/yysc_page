@@ -62,6 +62,12 @@ export default [
     component: './carousel',
   },
   {
+    name: 'activity',
+    icon: 'activity',
+    path: '/activity',
+    component: './activity',
+  },
+  {
     path: '*',
     layout: false,
     component: './404',
