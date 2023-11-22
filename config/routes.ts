@@ -68,6 +68,18 @@ export default [
     component: './activity',
   },
   {
+    name: 'category',
+    icon: 'category',
+    path: '/category',
+    component: './category',
+  },
+  {
+    name: 'soft',
+    icon: 'soft',
+    path: '/soft',
+    component: './soft',
+  },
+  {
     path: '*',
     layout: false,
     component: './404',
