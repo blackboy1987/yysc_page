@@ -1,23 +1,22 @@
-import { list, remove } from './service';
-import { PlusOutlined } from '@ant-design/icons';
-import type { ActionType, ProColumns } from '@ant-design/pro-components';
-import { PageContainer, ProTable } from '@ant-design/pro-components';
-import { Button, message, Modal } from 'antd';
-import React, { useRef, useState } from 'react';
+import {list, remove} from './service';
+import {PlusOutlined} from '@ant-design/icons';
+import type {ActionType, ProColumns} from '@ant-design/pro-components';
+import {PageContainer, ProTable} from '@ant-design/pro-components';
+import {Button, message, Modal} from 'antd';
+import React, {useRef, useState} from 'react';
 import Add from './components/Add';
 
 export default () => {
   const actionRef = useRef<ActionType>();
   const [values, setValues] = useState<Record<string, any>>({});
   const [addModalVisible, setAddModalVisible] = useState<boolean>(false);
-  const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
-  const handleRemove = (id?: number) => {
+  const handleRemove = (id: number) => {
     Modal.confirm({
       title: '提醒',
       content: '您正在删除数据',
       onOk: () => {
         remove({
-          ids: id || selectedRowKeys.join(','),
+          ids: id,
         }).then((result) => {
           if (result.code === 0) {
             message.success(result.msg).then();
@@ -31,28 +30,40 @@ export default () => {
   };
   const columns: ProColumns<Record<string, any>>[] = [
     {
-      title: '标题',
-      dataIndex: 'title',
+      title: '媒体ID',
+      dataIndex: 'mediaId',
     },
     {
-      title: '封面图',
-      dataIndex: 'image',
-      valueType: "image",
-      hideInSearch: true,
+      title: '开屏广告ID',
+      dataIndex: 'splashAdId',
     },
     {
-      title: '开始时间',
-      dataIndex: 'beginDate',
-      width: 150,
-      valueType: 'dateTime',
-      hideInSearch: true,
+      title: '横幅广告ID',
+      dataIndex: 'bannerAdId',
     },
     {
-      title: '结束时间',
-      dataIndex: 'endDate',
-      width: 150,
-      valueType: 'dateTime',
-      hideInSearch: true,
+      title: '模板广告ID',
+      dataIndex: 'templateAdId',
+    },
+    {
+      title: '插屏广告ID',
+      dataIndex: 'interAdId',
+    },
+    {
+      title: '信息流广告ID',
+      dataIndex: 'feedAdId',
+    },
+    {
+      title: '模板视频信息流广告ID',
+      dataIndex: 'videoFeedAdId',
+    },
+    {
+      title: '全屏视频广告ID',
+      dataIndex: 'fullScreenVideoAdId',
+    },
+    {
+      title: '激励视频广告ID',
+      dataIndex: 'rewardVideoAdId',
     },
     {
       title: '添加时间',
@@ -64,7 +75,7 @@ export default () => {
     {
       title: '操作',
       dataIndex: 'opt',
-      width: 150,
+      width: 120,
       valueType: 'option',
       render: (_, record) => [
         <Button
@@ -101,22 +112,9 @@ export default () => {
         search={false}
         size="small"
         tableAlertRender={false}
-        rowSelection={{
-          selectedRowKeys,
-          onChange: (selectedRowKeys) => setSelectedRowKeys(selectedRowKeys),
-        }}
         toolBarRender={() => [
           <Button type="primary" key="add" onClick={() => setAddModalVisible(true)}>
             <PlusOutlined /> 新增
-          </Button>,
-          <Button
-            disabled={selectedRowKeys.length === 0}
-            type="primary"
-            danger
-            key="remove"
-            onClick={() => handleRemove()}
-          >
-            删除
           </Button>,
         ]}
         request={list}

@@ -29,23 +29,6 @@ export default [
     component: './Welcome',
   },
   {
-    path: '/admin',
-    name: 'admin',
-    icon: 'crown',
-    access: 'canAdmin',
-    routes: [
-      {
-        path: '/admin',
-        redirect: '/admin/sub-page',
-      },
-      {
-        path: '/admin/sub-page',
-        name: 'sub-page',
-        component: './Admin',
-      },
-    ],
-  },
-  {
     name: 'list.table-list',
     icon: 'table',
     path: '/list',
@@ -57,27 +40,68 @@ export default [
   },
   {
     name: 'carousel',
-    icon: 'carousel',
     path: '/carousel',
     component: './carousel',
   },
   {
     name: 'activity',
-    icon: 'activity',
     path: '/activity',
     component: './activity',
   },
   {
     name: 'category',
-    icon: 'category',
     path: '/category',
     component: './category',
   },
   {
     name: 'soft',
-    icon: 'soft',
     path: '/soft',
     component: './soft',
+  },
+  {
+    name: 'adConfig',
+    path: '/adConfig',
+    component: './adConfig',
+  },
+  {
+    name: 'member',
+    path: '/member',
+    component: './member',
+  },
+  {
+    name: 'admin',
+    path: '/admin',
+    component: './admin',
+  },
+  {
+    name: 'hotSearch',
+    path: '/hotSearch',
+    component: './hotSearch',
+  },
+  {
+    name: 'optLog',
+    path: '/optLog',
+    component: './optLog',
+  },
+  {
+    name: 'pointLog',
+    path: '/pointLog',
+    component: './pointLog',
+  },
+  {
+    name: 'review',
+    path: '/review',
+    component: './review',
+  },
+  {
+    name: 'setting',
+    path: '/setting',
+    component: './setting',
+  },
+  {
+    name: 'signInLog',
+    path: '/signInLog',
+    component: './signInLog',
   },
   {
     path: '*',
