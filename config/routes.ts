@@ -104,6 +104,11 @@ export default [
     component: './signInLog',
   },
   {
+    name: 'appVersion',
+    path: '/appVersion',
+    component: './appVersion',
+  },
+  {
     path: '*',
     layout: false,
     component: './404',

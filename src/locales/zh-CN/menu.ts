@@ -61,4 +61,5 @@ export default {
   'menu.review':'评论管理',
   'menu.setting':'APP设置',
   'menu.signInLog':'签到记录',
+  'menu.appVersion':'版本控制',
 };
