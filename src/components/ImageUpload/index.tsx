@@ -1,6 +1,6 @@
-import { UploadOutlined } from '@ant-design/icons';
-import type { UploadProps } from 'antd';
-import { Button, message, Upload } from 'antd';
+import {UploadOutlined} from '@ant-design/icons';
+import type {UploadProps} from 'antd';
+import {Button, message, Upload} from 'antd';
 
 const ImageUpload = () =>{
 
@@ -9,7 +9,7 @@ const ImageUpload = () =>{
     accept:'image/png',
     action: 'https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188',
     headers: {
-      token: localStorage.getItem("token"),
+      token: localStorage.getItem("token")||'',
     },
     onChange(info) {
       if (info.file.status !== 'uploading') {
