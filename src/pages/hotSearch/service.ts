@@ -1,8 +1,8 @@
-import { request } from '@umijs/max';
-import { Constants } from '@/util/constants';
+import {request} from '@umijs/max';
+import {Constants} from '@/util/constants';
 
 export async function list(body: Record<string, any>, options?: { [key: string]: any }) {
-  return request(Constants.apiUrl + 'activity/list', {
+  return request(Constants.apiUrl + 'hotSearch/list', {
     method: 'POST',
     data: {
       ...body,
@@ -19,22 +19,14 @@ export async function list(body: Record<string, any>, options?: { [key: string]:
 }
 export async function save(body: Record<string, any>, options?: { [key: string]: any }) {
 
-  const formValues = {...body};
-  if(formValues.rangeDate){
-    formValues.beginDate = formValues.rangeDate[0].format("YYYY-MM-DD 00:00:00");
-    formValues.endDate = formValues.rangeDate[1].format("YYYY-MM-DD 23:59:59");
-  }
-  delete formValues.rangeDate;
-
-
-  return request(Constants.apiUrl + (body.id ? 'activity/update' : 'activity/save'), {
+  return request(Constants.apiUrl + (body.id ? 'hotSearch/update' : 'hotSearch/save'), {
     method: 'POST',
-    data: formValues,
+    data: body,
     ...(options || {}),
   });
 }
 export async function remove(body: Record<string, any>, options?: { [key: string]: any }) {
-  return request(Constants.apiUrl + 'activity/delete', {
+  return request(Constants.apiUrl + 'hotSearch/delete', {
     method: 'POST',
     data: body,
     ...(options || {}),

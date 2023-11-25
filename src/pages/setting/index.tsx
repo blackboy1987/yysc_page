@@ -1,7 +1,8 @@
 import {PageContainer} from '@ant-design/pro-components';
 import React, {useState} from 'react';
-import {Tabs,Card,Row,Col} from 'antd';
-import type { TabsProps } from 'antd';
+import type {TabsProps} from 'antd';
+import {Card, Tabs} from 'antd';
+import Base from "./components/Base";
 
 export default () => {
   const [key,setKey] = useState<string>("1")
@@ -9,6 +10,7 @@ export default () => {
     {
       key: '1',
       label: '基本设置',
+      children:<Base />
     },
     {
       key: '2',
@@ -37,21 +39,14 @@ export default () => {
   ];
   return (
     <PageContainer title={false}>
-      <Card size='small'>
-        <Row gutter={8}>
-          <Col span={3}>
-            <Tabs
-              onChange={activeKey=>setKey(activeKey)}
-              defaultActiveKey={key}
-              tabPosition='left'
-              style={{height:window.innerHeight-160,overflowY:'auto'}}
-              items={items}
-            />
-          </Col>
-          <Col span={20}>
-            {key}
-          </Col>
-        </Row>
+      <Card>
+        <Tabs
+          onChange={activeKey=>setKey(activeKey)}
+          defaultActiveKey={key}
+          tabPosition='left'
+          style={{height:window.innerHeight-160,overflowY:'auto'}}
+          items={items}
+        />
       </Card>
     </PageContainer>
   );

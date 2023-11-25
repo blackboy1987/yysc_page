@@ -5,4 +5,5 @@ if (!isDev) {
 }
 export const Constants = {
   apiUrl: `${url}`,
+  uploadUrl: `${url}file/upload`,
 };

@@ -1,9 +1,9 @@
-import { list, remove } from './service';
-import { PlusOutlined } from '@ant-design/icons';
-import type { ActionType, ProColumns } from '@ant-design/pro-components';
-import { PageContainer, ProTable } from '@ant-design/pro-components';
-import { Button, message, Modal } from 'antd';
-import React, { useRef, useState } from 'react';
+import {list, remove} from './service';
+import {PlusOutlined} from '@ant-design/icons';
+import type {ActionType, ProColumns} from '@ant-design/pro-components';
+import {PageContainer, ProTable} from '@ant-design/pro-components';
+import {Button, message, Modal} from 'antd';
+import React, {useRef, useState} from 'react';
 import Add from './components/Add';
 
 export default () => {
@@ -31,27 +31,12 @@ export default () => {
   };
   const columns: ProColumns<Record<string, any>>[] = [
     {
-      title: '标题',
-      dataIndex: 'title',
+      title: '关键词',
+      dataIndex: 'name',
     },
     {
-      title: '封面图',
-      dataIndex: 'image',
-      valueType: "image",
-      hideInSearch: true,
-    },
-    {
-      title: '开始时间',
-      dataIndex: 'beginDate',
-      width: 150,
-      valueType: 'dateTime',
-      hideInSearch: true,
-    },
-    {
-      title: '结束时间',
-      dataIndex: 'endDate',
-      width: 150,
-      valueType: 'dateTime',
+      title: '序号',
+      dataIndex: 'order',
       hideInSearch: true,
     },
     {

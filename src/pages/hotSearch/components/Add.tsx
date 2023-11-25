@@ -1,4 +1,4 @@
-import {DatePicker, Form, Input, message, Modal} from 'antd';
+import {Form, Input, message, Modal} from 'antd';
 import React, {useEffect} from 'react';
 import {save} from '../service';
 import moment from "moment";
@@ -33,7 +33,7 @@ const Add: React.FC<AddProps> = ({ open, values, onClose }) => {
       destroyOnClose
       maskClosable={false}
       open={open}
-      title="添加活动"
+      title="添加热门搜索"
       onOk={() => {
         form.validateFields().then((formValues) => {
           save(formValues).then((result) => {
@@ -52,14 +52,11 @@ const Add: React.FC<AddProps> = ({ open, values, onClose }) => {
         <Form.Item name="id" style={{ display: 'none' }}>
           <Input />
         </Form.Item>
-        <Form.Item label="图片" name="image" rules={[{ required: true, message: '必填' }]}>
+        <Form.Item label="关键词" name="name" rules={[{ required: true, message: '必填' }]}>
           <Input />
         </Form.Item>
-        <Form.Item label="标题" name="title" >
+        <Form.Item label="序号" name="order" >
           <Input />
-        </Form.Item>
-        <Form.Item label="有效时间" name="rangeDate" rules={[{ required: true, message: '必填' }]}>
-          <DatePicker.RangePicker format="YYYY-MM-DD 00:00:00" />
         </Form.Item>
       </Form>
     </Modal>
