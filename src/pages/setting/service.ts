@@ -15,3 +15,18 @@ export async function homeCenterBarSave(body: Record<string, any>, options?: { [
     ...(options || {}),
   });
 }
+
+export async function homeBottomBar(body: Record<string, any>, options?: { [key: string]: any }) {
+  return request(Constants.apiUrl + 'homeBottomBar', {
+    method: 'POST',
+    data: body,
+    ...(options || {}),
+  });
+}
+export async function homeBottomBarSave(body: Record<string, any>, options?: { [key: string]: any }) {
+  return request(Constants.apiUrl + 'homeBottomBarSave', {
+    method: 'POST',
+    data: body,
+    ...(options || {}),
+  });
+}

@@ -31,28 +31,36 @@ export default () => {
   };
   const columns: ProColumns<Record<string, any>>[] = [
     {
-      title: '标题',
-      dataIndex: 'title',
+      title: '昵称',
+      dataIndex: 'username',
     },
     {
-      title: '封面图',
+      title: '头像',
       dataIndex: 'image',
       valueType: "image",
       hideInSearch: true,
     },
     {
-      title: '开始时间',
-      dataIndex: 'beginDate',
-      width: 150,
-      valueType: 'dateTime',
-      hideInSearch: true,
+      title: '积分',
+      width: 80,
+      dataIndex: 'point',
     },
     {
-      title: '结束时间',
-      dataIndex: 'endDate',
+      title: '累计签到天数',
+      width: 120,
+      dataIndex: 'signInDays',
+    },
+    {
+      title: '连续签到天数',
+      width: 120,
+      dataIndex: 'continuousSignInDays',
+    },
+    {
+      title: '最近签到时间',
+      dataIndex: 'signInDate',
+      hideInSearch: true,
       width: 150,
       valueType: 'dateTime',
-      hideInSearch: true,
     },
     {
       title: '添加时间',
@@ -64,7 +72,7 @@ export default () => {
     {
       title: '操作',
       dataIndex: 'opt',
-      width: 150,
+      width: 120,
       valueType: 'option',
       render: (_, record) => [
         <Button

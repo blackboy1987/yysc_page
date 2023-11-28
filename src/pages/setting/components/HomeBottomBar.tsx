@@ -2,19 +2,19 @@ import {ProColumns, ProTable} from '@ant-design/pro-components';
 import {Button, Checkbox, Input} from 'antd';
 import {useEffect, useState} from 'react';
 import ImageUpload from "@/components/ImageUpload";
-import {homeCenterBar, homeCenterBarSave} from '../service'
+import {homeBottomBar, homeBottomBarSave} from '../service'
 
-const HomeCenterBar = () =>{
+const HomeBottomBar = () =>{
   const [dataSource, setDataSource] = useState([]);
 
   useEffect(() => {
-    homeCenterBar().then(result=>{
+    homeBottomBar().then(result=>{
       setDataSource(result.data)
     })
   }, []);
 
   const columns: ProColumns[] = [
-   {
+    {
       title:'名称',
       dataIndex:'name',
       width:180,
@@ -29,22 +29,42 @@ const HomeCenterBar = () =>{
     },{
       title:'图片',
       dataIndex: "image",
-      renderText:(_,record,index)=><Input.Search value={record.image} enterButton={<ImageUpload onSuccess={url=>{
-        const newDataSource = [...dataSource];
-        const current = newDataSource.filter((_,index1)=>index1===index);
-        if(current && current.length>0){
-          current[0].image = url;
-          setDataSource(newDataSource);
-        }
+      renderText:(_,record,index)=>(
+        <>
+          <Input.Search addonBefore='未选中' value={record.image} enterButton={<ImageUpload onSuccess={url=>{
+            const newDataSource = [...dataSource];
+            const current = newDataSource.filter((_,index1)=>index1===index);
+            if(current && current.length>0){
+              current[0].image = url;
+              setDataSource(newDataSource);
+            }
 
-      }}/>} onChange={e=>{
-        const newDataSource = [...dataSource];
-        const current = newDataSource.filter((_,index1)=>index1===index);
-        if(current && current.length>0){
-          current[0].image = e.currentTarget.value;
-          setDataSource(newDataSource);
-        }
-      }} />
+          }}/>} onChange={e=>{
+            const newDataSource = [...dataSource];
+            const current = newDataSource.filter((_,index1)=>index1===index);
+            if(current && current.length>0){
+              current[0].image = e.currentTarget.value;
+              setDataSource(newDataSource);
+            }
+          }} />
+          <Input.Search style={{marginTop:8}} addonBefore='选&nbsp;&nbsp;&nbsp;&nbsp;中' value={record.image} enterButton={<ImageUpload onSuccess={url=>{
+            const newDataSource = [...dataSource];
+            const current = newDataSource.filter((_,index1)=>index1===index);
+            if(current && current.length>0){
+              current[0].image = url;
+              setDataSource(newDataSource);
+            }
+
+          }}/>} onChange={e=>{
+            const newDataSource = [...dataSource];
+            const current = newDataSource.filter((_,index1)=>index1===index);
+            if(current && current.length>0){
+              current[0].image = e.currentTarget.value;
+              setDataSource(newDataSource);
+            }
+          }} />
+        </>
+      )
     },{
       title:'启用',
       dataIndex: "isEnabled",
@@ -94,7 +114,7 @@ const HomeCenterBar = () =>{
         ])
       }}>新增</Button>
       <Button type='primary' style={{marginTop:24,marginLeft:24}} onClick={()=>{
-        homeCenterBarSave({
+        homeBottomBarSave({
           str: JSON.stringify(dataSource.map((item,index)=>({
             key: index,
             ...item,
@@ -107,4 +127,4 @@ const HomeCenterBar = () =>{
   )
 }
 
-export default HomeCenterBar;
+export default HomeBottomBar;

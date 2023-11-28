@@ -95,13 +95,12 @@ export default () => {
         <PageContainer title={false}>
             <Row gutter={16}>
                 <Col span={4}>
-                    <Card size='small' title='分类' extra={<Button type='primary' size='small' onClick={() => setAddCategoryModalVisible(true)}>新增</Button>}>
+                    <Card size='small' title='字典分类' extra={<Button type='primary' size='small' onClick={() => setAddCategoryModalVisible(true)}>新增</Button>}>
                         <Tree
                             blockNode
                             defaultExpandAll
                             treeData={data}
                             onSelect={e => {
-                                console.log(e);
                                 if (e.length > 0) {
                                     setCategoryId(e[0]);
                                 } else {
@@ -148,7 +147,7 @@ export default () => {
             ) : null}
             {addCategoryModalVisible ? (
                 <AddCategory
-                    values={values}
+                    values={category}
                     open={addCategoryModalVisible}
                     onClose={() => {
                         setAddCategoryModalVisible(false);

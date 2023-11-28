@@ -1,10 +1,11 @@
-import {ProColumns, ProTable} from '@ant-design/pro-components';
-import {Button, Checkbox, Input} from 'antd';
+import type {ProColumns} from '@ant-design/pro-components';
+import {DragSortTable} from '@ant-design/pro-components';
+import {Button, Checkbox, Input, message} from 'antd';
 import {useEffect, useState} from 'react';
 import ImageUpload from "@/components/ImageUpload";
 import {homeCenterBar, homeCenterBarSave} from '../service'
 
-const HomeCenterBar = () =>{
+const HomeTopBar = () =>{
   const [dataSource, setDataSource] = useState([]);
 
   useEffect(() => {
@@ -14,7 +15,12 @@ const HomeCenterBar = () =>{
   }, []);
 
   const columns: ProColumns[] = [
-   {
+    {
+      title: '排序',
+      dataIndex: 'sort',
+      width: 50,
+      className: 'drag-visible',
+    },{
       title:'名称',
       dataIndex:'name',
       width:180,
@@ -72,9 +78,25 @@ const HomeCenterBar = () =>{
       ]
     }
   ];
+  const handleDragSortEnd = (
+    beforeIndex: number,
+    afterIndex: number,
+    newDataSource: any,
+  ) => {
+    setDataSource(newDataSource);
+    homeCenterBarSave({
+      str: JSON.stringify(newDataSource.map((item,index)=>({
+        key: index,
+        ...item,
+      })))
+    }).then(result=>{
+      setDataSource(result.data)
+    })
+    message.success('修改列表排序成功').then();
+  };
   return (
     <>
-      <ProTable
+      <DragSortTable
         cardProps={false}
         bordered
         size='small'
@@ -82,7 +104,9 @@ const HomeCenterBar = () =>{
         options={false}
         pagination={false}
         rowKey="key"
+        dragSortKey="sort"
         dataSource={dataSource}
+        onDragSortEnd={handleDragSortEnd}
         columns={columns}
       />
       <Button type='primary' style={{marginTop:24}} onClick={()=>{
@@ -107,4 +131,4 @@ const HomeCenterBar = () =>{
   )
 }
 
-export default HomeCenterBar;
+export default HomeTopBar;

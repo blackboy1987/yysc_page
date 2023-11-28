@@ -2,7 +2,7 @@ import { request } from '@umijs/max';
 import { Constants } from '@/util/constants';
 
 export async function list(body: Record<string, any>, options?: { [key: string]: any }) {
-  return request(Constants.apiUrl + 'activity/list', {
+  return request(Constants.apiUrl + 'member/list', {
     method: 'POST',
     data: {
       ...body,
@@ -27,14 +27,14 @@ export async function save(body: Record<string, any>, options?: { [key: string]:
   delete formValues.rangeDate;
 
 
-  return request(Constants.apiUrl + (body.id ? 'activity/update' : 'activity/save'), {
+  return request(Constants.apiUrl + (body.id ? 'member/update' : 'member/save'), {
     method: 'POST',
     data: formValues,
     ...(options || {}),
   });
 }
 export async function remove(body: Record<string, any>, options?: { [key: string]: any }) {
-  return request(Constants.apiUrl + 'activity/delete', {
+  return request(Constants.apiUrl + 'member/delete', {
     method: 'POST',
     data: body,
     ...(options || {}),

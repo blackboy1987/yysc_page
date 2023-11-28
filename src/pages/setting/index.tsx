@@ -3,6 +3,8 @@ import React, {useState} from 'react';
 import {Card, Tabs, TabsProps} from 'antd';
 import Base from "./components/Base";
 import HomeCenterBar from "./components/HomeCenterBar";
+import HomeTopBar from "./components/HomeTopBar";
+import HomeBottomBar from "./components/HomeBottomBar";
 
 export default () => {
   const [activityKey,setActivityKey] = useState<string>("4")
@@ -13,15 +15,15 @@ export default () => {
     },
     {
       key: '2',
-      label: '首页底部栏',
-    },
-    {
-      key: '3',
       label: '首页顶部栏',
     },
     {
-      key: '4',
+      key: '3',
       label: '首页中部工具栏',
+    },
+    {
+      key: '4',
+      label: '首页底部栏',
     },
     {
       key: '5',
@@ -52,7 +54,13 @@ export default () => {
               activityKey==="1" ? (<Base />) : null
             }
             {
-              activityKey==="4" ? (<HomeCenterBar />) : null
+              activityKey==="2" ? (<HomeTopBar />) : null
+            }
+            {
+              activityKey==="3" ? (<HomeCenterBar />) : null
+            }
+            {
+              activityKey==="4" ? (<HomeBottomBar />) : null
             }
           </div>
         </div>
