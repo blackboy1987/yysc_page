@@ -1,16 +1,15 @@
 import {PageContainer} from '@ant-design/pro-components';
 import React, {useState} from 'react';
-import type {TabsProps} from 'antd';
-import {Card, Tabs} from 'antd';
+import {Card, Tabs, TabsProps} from 'antd';
 import Base from "./components/Base";
+import HomeCenterBar from "./components/HomeCenterBar";
 
 export default () => {
-  const [key,setKey] = useState<string>("1")
+  const [activityKey,setActivityKey] = useState<string>("4")
   const items: TabsProps['items'] = [
     {
       key: '1',
       label: '基本设置',
-      children:<Base />
     },
     {
       key: '2',
@@ -40,13 +39,23 @@ export default () => {
   return (
     <PageContainer title={false}>
       <Card>
-        <Tabs
-          onChange={activeKey=>setKey(activeKey)}
-          defaultActiveKey={key}
-          tabPosition='left'
-          style={{height:window.innerHeight-160,overflowY:'auto'}}
-          items={items}
-        />
+        <div style={{display:'flex'}}>
+          <Tabs
+            onChange={activeKey=>setActivityKey(activeKey)}
+            defaultActiveKey={activityKey}
+            tabPosition='left'
+            style={{height:window.innerHeight-160,overflowY:'auto'}}
+            items={items}
+          />
+          <div style={{flex:1}}>
+            {
+              activityKey==="1" ? (<Base />) : null
+            }
+            {
+              activityKey==="4" ? (<HomeCenterBar />) : null
+            }
+          </div>
+        </div>
       </Card>
     </PageContainer>
   );

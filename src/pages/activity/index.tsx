@@ -5,6 +5,7 @@ import { PageContainer, ProTable } from '@ant-design/pro-components';
 import { Button, message, Modal } from 'antd';
 import React, { useRef, useState } from 'react';
 import Add from './components/Add';
+import moment from "moment";
 
 export default () => {
   const actionRef = useRef<ActionType>();
@@ -31,40 +32,34 @@ export default () => {
   };
   const columns: ProColumns<Record<string, any>>[] = [
     {
+      title: '图片',
+      dataIndex: 'image',
+      valueType:'image',
+      hideInSearch: true,
+      width: 80,
+    },
+    {
       title: '标题',
       dataIndex: 'title',
+      renderText:(text,record)=><a href={record.url} target="_blank" rel="noreferrer">{text}</a>
     },
     {
-      title: '封面图',
-      dataIndex: 'image',
-      valueType: "image",
-      hideInSearch: true,
-    },
-    {
-      title: '开始时间',
+      title: '有效时间',
       dataIndex: 'beginDate',
-      width: 150,
-      valueType: 'dateTime',
       hideInSearch: true,
+      width:180,
+      renderText:(_,record)=><span>{moment(record.beginDate).format("YYYY-MM-DD")}~{moment(record.endDate).format("YYYY-MM-DD")}</span>
     },
     {
-      title: '结束时间',
-      dataIndex: 'endDate',
-      width: 150,
-      valueType: 'dateTime',
+      title: '序号',
+      dataIndex: 'order',
       hideInSearch: true,
-    },
-    {
-      title: '添加时间',
-      dataIndex: 'createdDate',
-      hideInSearch: true,
-      width: 150,
-      valueType: 'dateTime',
+      width:50,
     },
     {
       title: '操作',
       dataIndex: 'opt',
-      width: 150,
+      width: 120,
       valueType: 'option',
       render: (_, record) => [
         <Button
@@ -98,7 +93,6 @@ export default () => {
         options={false}
         rowKey="id"
         bordered
-        search={false}
         size="small"
         tableAlertRender={false}
         rowSelection={{

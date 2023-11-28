@@ -1,13 +1,19 @@
-import {UploadOutlined} from '@ant-design/icons';
 import type {UploadProps} from 'antd';
-import {Button, message, Upload} from 'antd';
+import {message, Upload} from 'antd';
+import {Constants} from "@/util/constants";
+import React from "react";
 
-const ImageUpload = () =>{
+type ImageUploadProps = {
+  onSuccess: (url: string) => void;
+}
+const ImageUpload:React.FC<ImageUploadProps> = ({onSuccess}) =>{
 
   const props: UploadProps = {
     name: 'file',
+    multiple:false,
     accept:'image/png',
-    action: 'https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188',
+    action: Constants.uploadUrl,
+    showUploadList: false,
     headers: {
       token: localStorage.getItem("token")||'',
     },
@@ -16,7 +22,8 @@ const ImageUpload = () =>{
         console.log(info.file, info.fileList);
       }
       if (info.file.status === 'done') {
-        message.success(`${info.file.name} file uploaded successfully`);
+        message.success("上传成功").then();
+        onSuccess(info.file.response.data);
       } else if (info.file.status === 'error') {
         message.error(`${info.file.name} file upload failed.`);
       }
@@ -25,7 +32,7 @@ const ImageUpload = () =>{
 
   return (
     <Upload {...props}>
-      <Button icon={<UploadOutlined />}>选择文件</Button>
+      <span style={{color:'#ffffff'}}>选择文件</span>
     </Upload>
   )
 }

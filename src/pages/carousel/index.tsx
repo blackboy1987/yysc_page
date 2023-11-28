@@ -5,6 +5,7 @@ import { PageContainer, ProTable } from '@ant-design/pro-components';
 import { Button, message, Modal } from 'antd';
 import React, { useRef, useState } from 'react';
 import Add from './components/Add';
+import moment from "moment";
 
 export default () => {
   const actionRef = useRef<ActionType>();
@@ -31,36 +32,48 @@ export default () => {
   };
   const columns: ProColumns<Record<string, any>>[] = [
     {
-      title: '项目名称',
-      dataIndex: 'name',
-    },
-    {
-      title: '项目描述',
-      dataIndex: 'memo',
+      title: '图片',
+      dataIndex: 'image',
+      valueType:'image',
       hideInSearch: true,
-    },
-    {
-      title: '项目包名',
-      dataIndex: 'packageName',
-      hideInSearch: true,
-    },
-    {
-      title: '创建人',
-      dataIndex: 'creator',
       width: 80,
+    },
+    {
+      title: 'logo',
+      dataIndex: 'logo',
+      valueType:'image',
+      hideInSearch: true,
+      width: 80,
+    },
+    {
+      title: '主标题',
+      dataIndex: 'title1',
+      hideInSearch: true,
+      width: 120,
+      renderText:(text,record)=><a href={record.downloadUrl} target="_blank" rel="noreferrer">{text}</a>
+    },
+    {
+      title: '副标题',
+      dataIndex: 'title2',
       hideInSearch: true,
     },
     {
-      title: '添加时间',
-      dataIndex: 'createdDate',
+      title: '有效时间',
+      dataIndex: 'beginDate',
       hideInSearch: true,
-      width: 150,
-      valueType: 'dateTime',
+      width:180,
+      renderText:(_,record)=><span>{moment(record.beginDate).format("YYYY-MM-DD")}~{moment(record.endDate).format("YYYY-MM-DD")}</span>
+    },
+    {
+      title: '序号',
+      dataIndex: 'order',
+      hideInSearch: true,
+      width:50,
     },
     {
       title: '操作',
       dataIndex: 'opt',
-      width: 150,
+      width: 120,
       valueType: 'option',
       render: (_, record) => [
         <Button

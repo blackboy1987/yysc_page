@@ -1,6 +1,7 @@
-import {DatePicker, Form, Input, message, Modal} from 'antd';
-import React, {useEffect} from 'react';
-import {save} from '../service';
+import {DatePicker, Form, Input, InputNumber, message, Modal} from 'antd';
+import React, { useEffect } from 'react';
+import { save } from '../service';
+import ImageUpload from "@/components/ImageUpload";
 import moment from "moment";
 
 const layout = {
@@ -22,18 +23,20 @@ const Add: React.FC<AddProps> = ({ open, values, onClose }) => {
   const [form] = Form.useForm();
   useEffect(() => {
     form.setFieldsValue(values || {});
-    if(values){
+    if(Object.keys(values).length>0){
+      form.setFieldsValue(values);
       form.setFieldsValue({
-        rangeDate:[moment(values.beginDate),moment(values.endDate)]
+        rangeDate:[moment(values.beginDate||new Date()),moment(values.endDate||new Date())],
       })
     }
   }, []);
   return (
     <Modal
+      width={800}
       destroyOnClose
       maskClosable={false}
       open={open}
-      title="添加活动"
+      title="添加/修改活动"
       onOk={() => {
         form.validateFields().then((formValues) => {
           save(formValues).then((result) => {
@@ -52,14 +55,22 @@ const Add: React.FC<AddProps> = ({ open, values, onClose }) => {
         <Form.Item name="id" style={{ display: 'none' }}>
           <Input />
         </Form.Item>
-        <Form.Item label="图片" name="image" rules={[{ required: true, message: '必填' }]}>
-          <Input />
+        <Form.Item label="活动图片" name="image" rules={[{ required: true, message: '必填' }]}>
+          <Input.Search enterButton={<ImageUpload onSuccess={url=>form.setFieldsValue({
+            image: url,
+          })} />} />
         </Form.Item>
         <Form.Item label="标题" name="title" >
           <Input />
         </Form.Item>
+        <Form.Item label="跳转地址" name="url" >
+          <Input />
+        </Form.Item>
+        <Form.Item label="序号" name="order" rules={[{ required: true, message: '必填' }]}>
+          <InputNumber min={1} step={1} precision={0} />
+        </Form.Item>
         <Form.Item label="有效时间" name="rangeDate" rules={[{ required: true, message: '必填' }]}>
-          <DatePicker.RangePicker format="YYYY-MM-DD 00:00:00" />
+          <DatePicker.RangePicker format="YYYY-MM-DD" />
         </Form.Item>
       </Form>
     </Modal>
