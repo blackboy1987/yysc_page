@@ -109,6 +109,11 @@ export default [
     component: './appVersion',
   },
   {
+    name: 'dic',
+    path: '/dic',
+    component: './dic',
+  },
+  {
     path: '*',
     layout: false,
     component: './404',
