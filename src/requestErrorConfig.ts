@@ -99,7 +99,7 @@ export const errorConfig: RequestConfig = {
         headers: {
           ...headers,
           'content-type': 'application/x-www-form-urlencoded',
-          token: localStorage.getItem('token') || '',
+          // token: localStorage.getItem('token') || '',
         },
         withCredentials: true,
         data: qs.stringify(config.data || {}),
