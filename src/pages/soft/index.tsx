@@ -39,8 +39,49 @@ export default () => {
   };
   const columns: ProColumns<Record<string, any>>[] = [
     {
-      title: '分类名',
+      title: 'logo',
+      dataIndex: 'logo',
+      width:80,
+      hideInSearch: true,
+      valueType:'image',
+      fieldProps:{
+        width:60,
+      }
+    },
+    {
+      title: '软件名',
       dataIndex: 'name',
+    },
+    {
+      title: '状态',
+      dataIndex: 'status',
+      width:60,
+      valueEnum:{
+        0:{
+          text:'待审核',
+        },
+        1:{
+          text:'已通过',
+        },
+        2:{
+          text:'已拒绝',
+        },
+        100:{
+          text:'草稿',
+        },
+       101:{
+          text:'已删除',
+        },
+        102:{
+          text:'已删除',
+        },
+      },
+    },
+    {
+      title: '用户',
+      width:60,
+      hideInSearch: true,
+      dataIndex: 'username',
     },
     {
       title: '添加时间',
