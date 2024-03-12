@@ -1,7 +1,8 @@
 import {Form, Input, InputNumber, message, Modal, TreeSelect} from 'antd';
 import React, {useEffect, useState} from 'react';
 import {save, tree} from '../service';
-import moment from "moment";
+// @ts-ignore
+import {DefaultOptionType} from "rc-select/es/Select";
 
 const layout = {
   labelCol: {
@@ -53,9 +54,9 @@ const Add: React.FC<AddProps> = ({ open, values, onClose }) => {
         </Form.Item>
         <Form.Item label="上级分类" name="parentId">
           <TreeSelect
-            disabled={values.id}
+            disabled={values?.id}
             showSearch
-            filterTreeNode={(inputValue: string, treeNode: TreeNode)=>treeNode.title.indexOf(inputValue)>=0}
+            filterTreeNode={(inputValue: string, treeNode: DefaultOptionType)=>treeNode.title.indexOf(inputValue)>=0}
             style={{ width: '100%' }}
             treeDefaultExpandAll
             fieldNames={{label:'title',value:'key'}}

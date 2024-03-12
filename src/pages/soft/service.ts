@@ -37,3 +37,10 @@ export async function tree(options?: { [key: string]: any }) {
     ...(options || {}),
   });
 }
+export async function audit(body: Record<string, any>, options?: { [key: string]: any }) {
+  return request(Constants.apiUrl + (body.status==1 ? 'soft/pass' : 'soft/reject'), {
+    method: 'POST',
+    data: body,
+    ...(options || {}),
+  });
+}

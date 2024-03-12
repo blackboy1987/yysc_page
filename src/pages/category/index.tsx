@@ -11,7 +11,7 @@ export default () => {
   const [values, setValues] = useState<Record<string, any>>({});
   const [addModalVisible, setAddModalVisible] = useState<boolean>(false);
   const [data,setData] = useState<Record<string, any>[]>([]);
-  const [parentId,setParentId] = useState<number>(0);
+  const [parentId,setParentId] = useState<React.Key>(0);
 
   useEffect(()=>{
     tree().then(result=>{
@@ -90,9 +90,11 @@ export default () => {
         <Col span={4}>
           <Card size='small'>
             <Tree
+              style={{height:window.innerHeight-160}}
               blockNode
               defaultExpandAll
               treeData={data}
+              showLine
               onSelect={e=>{
                 if(e.length>0) {
                   setParentId(e[0]);
@@ -109,6 +111,7 @@ export default () => {
             options={false}
             rowKey="id"
             bordered
+            search={false}
             size="small"
             tableAlertRender={false}
             toolBarRender={() => [
@@ -121,7 +124,7 @@ export default () => {
             }}
             request={list}
             pagination={false}
-            scroll={{y:window.innerHeight-340}}
+            scroll={{y:window.innerHeight-220}}
             columns={columns}
           />
         </Col>

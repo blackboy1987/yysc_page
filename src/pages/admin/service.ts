@@ -2,7 +2,7 @@ import { request } from '@umijs/max';
 import { Constants } from '@/util/constants';
 
 export async function list(body: Record<string, any>, options?: { [key: string]: any }) {
-  return request(Constants.apiUrl + 'activity/list', {
+  return request(Constants.apiUrl + 'admin/list', {
     method: 'POST',
     data: {
       ...body,

@@ -106,6 +106,7 @@ export default () => {
         actionRef={actionRef}
         options={false}
         rowKey="id"
+        search={false}
         bordered
         size="small"
         tableAlertRender={false}

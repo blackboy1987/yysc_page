@@ -93,6 +93,7 @@ export default () => {
         options={false}
         rowKey="id"
         bordered
+        search={false}
         size="small"
         tableAlertRender={false}
         rowSelection={{

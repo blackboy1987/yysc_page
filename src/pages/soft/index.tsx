@@ -1,4 +1,4 @@
-import {list, remove, tree} from './service';
+import {list, remove, tree,audit} from './service';
 import {PlusOutlined} from '@ant-design/icons';
 import type {ActionType, ProColumns} from '@ant-design/pro-components';
 import {PageContainer, ProTable} from '@ant-design/pro-components';
@@ -11,7 +11,7 @@ export default () => {
   const [values, setValues] = useState<Record<string, any>>({});
   const [addModalVisible, setAddModalVisible] = useState<boolean>(false);
   const [data,setData] = useState<Record<string, any>[]>([]);
-  const [categoryId,setCategoryId] = useState<number|null>(null);
+  const [categoryId,setCategoryId] = useState<React.Key | null>(null);
 
   useEffect(()=>{
     tree().then(result=>{
@@ -37,6 +37,28 @@ export default () => {
       },
     });
   };
+  const handleAudit = (id: number,status: 1|2) => {
+    Modal.confirm({
+      title: '提醒',
+      content: '您正在审核数据',
+      onOk: () => {
+        audit({
+          ids: id,
+          status,
+        }).then((result) => {
+          if (result.code === 0) {
+            message.success(result.msg).then();
+            actionRef.current?.reload();
+          } else {
+            message.error(result.msg).then();
+          }
+        });
+      },
+    });
+  };
+
+
+
   const columns: ProColumns<Record<string, any>>[] = [
     {
       title: 'logo',
@@ -93,10 +115,11 @@ export default () => {
     {
       title: '操作',
       dataIndex: 'opt',
-      width: 120,
+      width: 180,
       valueType: 'option',
-      render: (_, record) => [
-        <Button
+      render: (_, record) => {
+        const array = [];
+        array.push(<Button
           key="edit"
           size="small"
           type="primary"
@@ -106,8 +129,8 @@ export default () => {
           }}
         >
           修改
-        </Button>,
-        <Button
+        </Button>);
+        array.push(<Button
           key="remove"
           size="small"
           type="primary"
@@ -115,8 +138,29 @@ export default () => {
           onClick={() => handleRemove(record.id)}
         >
           删除
-        </Button>,
-      ],
+        </Button>)
+        if(record.status==0 || record.status==2){
+          array.push((record.status==0 || record.status == 2) && <Button
+            key="pass"
+            size="small"
+            type="primary"
+            onClick={() => handleAudit(record.id,1)}
+          >
+            通过
+          </Button>)
+        }else{
+          array.push((record.status==0 || record.status == 2) && <Button
+            key="reject"
+            size="small"
+            type="primary"
+            danger
+            onClick={() => handleAudit(record.id,2)}
+          >
+            拒绝
+          </Button>)
+        }
+        return array;
+      },
     },
   ];
 
