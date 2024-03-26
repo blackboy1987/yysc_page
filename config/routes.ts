@@ -44,11 +44,6 @@ export default [
     component: './carousel',
   },
   {
-    name: 'activity',
-    path: '/activity',
-    component: './activity',
-  },
-  {
     name: 'category',
     path: '/category',
     component: './category',

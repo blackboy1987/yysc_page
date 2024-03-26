@@ -15,7 +15,7 @@ const ImageUpload:React.FC<ImageUploadProps> = ({onSuccess}) =>{
     action: Constants.uploadUrl,
     showUploadList: false,
     headers: {
-      token: localStorage.getItem("token")||'',
+      // token: localStorage.getItem("token")||'',
     },
     onChange(info) {
       if (info.file.status !== 'uploading') {

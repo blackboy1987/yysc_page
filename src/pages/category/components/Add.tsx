@@ -54,7 +54,6 @@ const Add: React.FC<AddProps> = ({ open, values, onClose }) => {
         </Form.Item>
         <Form.Item label="上级分类" name="parentId">
           <TreeSelect
-            disabled={values?.id}
             showSearch
             filterTreeNode={(inputValue: string, treeNode: DefaultOptionType)=>treeNode.title.indexOf(inputValue)>=0}
             style={{ width: '100%' }}

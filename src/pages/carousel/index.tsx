@@ -36,26 +36,16 @@ export default () => {
       dataIndex: 'image',
       valueType:'image',
       hideInSearch: true,
-      width: 80,
+      fieldProps:{
+        width:100
+      }
     },
     {
-      title: 'logo',
-      dataIndex: 'logo',
-      valueType:'image',
+      title: '跳转地址',
+      dataIndex: 'url',
       hideInSearch: true,
       width: 80,
-    },
-    {
-      title: '主标题',
-      dataIndex: 'title1',
-      hideInSearch: true,
-      width: 120,
-      renderText:(text,record)=><a href={record.downloadUrl} target="_blank" rel="noreferrer">{text}</a>
-    },
-    {
-      title: '副标题',
-      dataIndex: 'title2',
-      hideInSearch: true,
+      renderText:(text,record)=><a href={record.url} target="_blank" rel="noreferrer">查看</a>
     },
     {
       title: '有效时间',
@@ -73,7 +63,7 @@ export default () => {
     {
       title: '操作',
       dataIndex: 'opt',
-      width: 120,
+      width: 60,
       valueType: 'option',
       render: (_, record) => [
         <Button

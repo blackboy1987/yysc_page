@@ -50,7 +50,6 @@ export default {
   'menu.editor.koni': '拓扑编辑器',
   'menu.category':'分类管理',
   'menu.carousel':'轮播图',
-  'menu.activity':'活动管理',
   'menu.soft':'应用管理',
   'menu.adConfig':'广告配置',
   'menu.hotSearch':'热门搜索',

@@ -60,18 +60,7 @@ const Add: React.FC<AddProps> = ({ open, values, onClose }) => {
             image: url,
           })} />} />
         </Form.Item>
-        <Form.Item label="logo" name="logo" >
-          <Input.Search enterButton={<ImageUpload onSuccess={url=>form.setFieldsValue({
-            logo: url,
-          })} />} />
-        </Form.Item>
-        <Form.Item label="主标题" name="title1" >
-          <Input />
-        </Form.Item>
-        <Form.Item label="副标题" name="title2" >
-          <Input />
-        </Form.Item>
-        <Form.Item label="下载地址" name="downloadUrl" >
+        <Form.Item label="跳转地址" name="url" >
           <Input />
         </Form.Item>
         <Form.Item label="有效时间" name="rangeDate" rules={[{ required: true, message: '必填' }]}>
