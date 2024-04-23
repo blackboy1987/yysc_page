@@ -1,6 +1,7 @@
 ﻿import type { RequestOptions } from '@@/plugin-request/request';
 import type { RequestConfig } from '@umijs/max';
 import { message, notification } from 'antd';
+// @ts-ignore
 import qs from 'qs';
 
 // 错误处理方案： 错误类型
