@@ -1,10 +1,12 @@
 import {list, remove, tree,audit} from './service';
-import {PlusOutlined} from '@ant-design/icons';
+import {CheckOutlined, CloseOutlined, DeleteOutlined, EditOutlined, PlusOutlined} from '@ant-design/icons';
 import type {ActionType, ProColumns} from '@ant-design/pro-components';
 import {PageContainer, ProTable} from '@ant-design/pro-components';
 import {Button, Card, Col, message, Modal, Row, Tree} from 'antd';
 import React, {useEffect, useRef, useState} from 'react';
 import Add from './components/Add';
+import MyIcon from "@/components/MyIcon";
+import {CheckOutline} from "antd-mobile-icons";
 
 export default () => {
   const actionRef = useRef<ActionType>();
@@ -115,49 +117,19 @@ export default () => {
     {
       title: '操作',
       dataIndex: 'opt',
-      width: 180,
+      width: 130,
       valueType: 'option',
       render: (_, record) => {
         const array = [];
-        array.push(<Button
-          key="edit"
-          size="small"
-          type="primary"
-          onClick={() => {
-            setAddModalVisible(true);
-            setValues(record);
-          }}
-        >
-          修改
-        </Button>);
-        array.push(<Button
-          key="remove"
-          size="small"
-          type="primary"
-          danger
-          onClick={() => handleRemove(record.id)}
-        >
-          删除
-        </Button>)
-        if(record.status==0 || record.status==2){
-          array.push((record.status==0 || record.status == 2) && <Button
-            key="pass"
-            size="small"
-            type="primary"
-            onClick={() => handleAudit(record.id,1)}
-          >
-            通过
-          </Button>)
+        array.push(<Button key="edit" size="small" type="primary" onClick={() => {setAddModalVisible(true);setValues(record);}} icon={<EditOutlined />}/>);
+        array.push(<Button key="remove" size="small" type="primary" danger onClick={() => handleRemove(record.id)} icon={<DeleteOutlined />}/>)
+        if(record.status==0){
+          array.push(<Button key="pass" size="small" type="primary" onClick={() => handleAudit(record.id,1)} icon={<CheckOutlined />}/>)
+          array.push(<Button key="reject" size="small" type="primary" danger onClick={() => handleAudit(record.id,2)} icon={<CloseOutlined />}/>)
+        }else if(record.status==1){
+          array.push(<Button key="reject" size="small" type="primary" danger onClick={() => handleAudit(record.id,2)} icon={<CloseOutlined />}/>)
         }else{
-          array.push((record.status==0 || record.status == 2) && <Button
-            key="reject"
-            size="small"
-            type="primary"
-            danger
-            onClick={() => handleAudit(record.id,2)}
-          >
-            拒绝
-          </Button>)
+          array.push(<Button key="pass" size="small" type="primary" onClick={() => handleAudit(record.id,1)} icon={<CheckOutlined />}/>)
         }
         return array;
       },

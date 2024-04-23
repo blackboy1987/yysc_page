@@ -23,20 +23,8 @@ export default [
     ],
   },
   {
-    path: '/welcome',
-    name: 'welcome',
-    icon: 'smile',
-    component: './Welcome',
-  },
-  {
-    name: 'list.table-list',
-    icon: 'table',
-    path: '/list',
-    component: './TableList',
-  },
-  {
     path: '/',
-    redirect: '/welcome',
+    redirect: '/carousel',
   },
   {
     name: 'carousel',
@@ -77,36 +65,6 @@ export default [
     name: 'optLog',
     path: '/optLog',
     component: './optLog',
-  },
-  {
-    name: 'pointLog',
-    path: '/pointLog',
-    component: './pointLog',
-  },
-  {
-    name: 'review',
-    path: '/review',
-    component: './review',
-  },
-  {
-    name: 'setting',
-    path: '/setting',
-    component: './setting',
-  },
-  {
-    name: 'signInLog',
-    path: '/signInLog',
-    component: './signInLog',
-  },
-  {
-    name: 'appVersion',
-    path: '/appVersion',
-    component: './appVersion',
-  },
-  {
-    name: 'dic',
-    path: '/dic',
-    component: './dic',
   },
   {
     path: '*',
