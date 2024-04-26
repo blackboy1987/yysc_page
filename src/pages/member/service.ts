@@ -40,3 +40,26 @@ export async function remove(body: Record<string, any>, options?: { [key: string
     ...(options || {}),
   });
 }
+export async function point(body: Record<string, any>, options?: { [key: string]: any }) {
+  return request(Constants.apiUrl + 'member/point', {
+    method: 'POST',
+    data: body,
+    ...(options || {}),
+  });
+}
+export async function changePoint(body: Record<string, any>, options?: { [key: string]: any }) {
+  return request(Constants.apiUrl + 'member/changePoint', {
+    method: 'POST',
+    data: body,
+    ...(options || {}),
+  });
+}
+export async function pointLog(body: Record<string, any>, options?: { [key: string]: any }) {
+  return request(Constants.apiUrl + 'member/pointLog', {
+    method: 'POST',
+    data: body,
+    ...(options || {}),
+  });
+}
+
+

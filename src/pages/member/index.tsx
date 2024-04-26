@@ -1,15 +1,16 @@
-import { list, remove } from './service';
-import { PlusOutlined } from '@ant-design/icons';
-import type { ActionType, ProColumns } from '@ant-design/pro-components';
-import { PageContainer, ProTable } from '@ant-design/pro-components';
-import { Button, message, Modal } from 'antd';
-import React, { useRef, useState } from 'react';
-import Add from './components/Add';
+import {list, remove} from './service';
+import type {ActionType, ProColumns} from '@ant-design/pro-components';
+import {PageContainer, ProTable} from '@ant-design/pro-components';
+import {Button, message, Modal} from 'antd';
+import React, {useRef, useState} from 'react';
+import AdjustPoint from "./components/AdjustPoint";
+import PointLog from "./components/PointLog";
 
 export default () => {
   const actionRef = useRef<ActionType>();
   const [values, setValues] = useState<Record<string, any>>({});
-  const [addModalVisible, setAddModalVisible] = useState<boolean>(false);
+  const [adjustPointModalVisible, setAdjustPointModalVisible] = useState<boolean>(false);
+  const [pointLogModalVisible, setPointLogModalVisible] = useState<boolean>(false);
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
   const handleRemove = (id?: number) => {
     Modal.confirm({
@@ -46,6 +47,15 @@ export default () => {
       dataIndex: 'point',
     },
     {
+      title: '剩余积分',
+      width: 80,
+      dataIndex: 'remainPoint',
+      renderText:(_,record)=><a onClick={()=>{
+        setValues(record);
+        setPointLogModalVisible(true);
+      }}>{record.remainPoint}</a>
+    },
+    {
       title: '累计签到天数',
       width: 120,
       dataIndex: 'signInDays',
@@ -76,24 +86,15 @@ export default () => {
       valueType: 'option',
       render: (_, record) => [
         <Button
-          key="edit"
-          size="small"
-          type="primary"
-          onClick={() => {
-            setAddModalVisible(true);
-            setValues(record);
-          }}
-        >
-          修改
-        </Button>,
-        <Button
           key="remove"
           size="small"
           type="primary"
-          danger
-          onClick={() => handleRemove(record.id)}
+          onClick={() => {
+            setAdjustPointModalVisible(true);
+            setValues(record);
+          }}
         >
-          删除
+          积分调整
         </Button>,
       ],
     },
@@ -114,9 +115,6 @@ export default () => {
           onChange: (selectedRowKeys) => setSelectedRowKeys(selectedRowKeys),
         }}
         toolBarRender={() => [
-          <Button type="primary" key="add" onClick={() => setAddModalVisible(true)}>
-            <PlusOutlined /> 新增
-          </Button>,
           <Button
             disabled={selectedRowKeys.length === 0}
             type="primary"
@@ -130,13 +128,22 @@ export default () => {
         request={list}
         columns={columns}
       />
-      {addModalVisible ? (
-        <Add
+      {adjustPointModalVisible && Object.keys(values).length>0 ? (
+        <AdjustPoint
           values={values}
-          open={addModalVisible}
+          open={adjustPointModalVisible}
           onClose={() => {
-            setAddModalVisible(false);
-            actionRef.current?.reload();
+            setAdjustPointModalVisible(false);
+            setValues({});
+          }}
+        />
+      ) : null}
+      {pointLogModalVisible && Object.keys(values).length>0 ? (
+        <PointLog
+          values={values}
+          open={pointLogModalVisible}
+          onClose={() => {
+            setPointLogModalVisible(false);
             setValues({});
           }}
         />
