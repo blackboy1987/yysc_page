@@ -3,7 +3,8 @@ import type {ActionType, ProColumns} from '@ant-design/pro-components';
 import {PageContainer, ProTable} from '@ant-design/pro-components';
 import React, {useRef} from 'react';
 
-export default ({softId}:{softId?: number}) => {
+export default () => {
+
   const actionRef = useRef<ActionType>();
 
   const columns: ProColumns<Record<string, any>>[] = [
@@ -35,9 +36,6 @@ export default ({softId}:{softId?: number}) => {
         bordered
         size="small"
         tableAlertRender={false}
-        params={{
-          softId,
-        }}
         request={list}
         scroll={{y:window.innerHeight-340}}
         columns={columns}

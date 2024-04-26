@@ -1,8 +1,8 @@
-import {Form, Input, InputNumber, message, Modal, TreeSelect} from 'antd';
-import React, {useEffect, useState} from 'react';
-import {save, tree} from '../service';
-import moment from "moment";
-import SoftDownloadLog from "@/pages/softDownloadLog";
+import type {ActionType, ProColumns} from '@ant-design/pro-components';
+import {ProTable} from '@ant-design/pro-components';
+import React, {useRef} from 'react';
+import {Modal} from 'antd';
+import {list} from "@/pages/softDownloadLog/service";
 
 type AddProps = {
   open: boolean;
@@ -11,9 +11,26 @@ type AddProps = {
 };
 
 const DownloadLog: React.FC<AddProps> = ({ open, values, onClose }) => {
-  useEffect(() => {
 
-  }, []);
+  const actionRef = useRef<ActionType>();
+
+  const columns: ProColumns<Record<string, any>>[] = [
+    {
+      title: '用户',
+      width:60,
+      hideInSearch: true,
+      dataIndex: 'username',
+    },
+    {
+      title: '操作时间',
+      dataIndex: 'createdDate',
+      hideInSearch: true,
+      width: 150,
+      valueType: 'dateTime',
+    },
+  ];
+
+
   return (
     <Modal
       width='80%'
@@ -25,7 +42,22 @@ const DownloadLog: React.FC<AddProps> = ({ open, values, onClose }) => {
       footer={null}
       onCancel={onClose}
     >
-      <SoftDownloadLog softId={values.id} />
+      <ProTable<Record<string, any>, Record<string, any>>
+        actionRef={actionRef}
+        options={false}
+        cardProps={false}
+        rowKey="id"
+        bordered
+        search={false}
+        size="small"
+        tableAlertRender={false}
+        params={{
+          softId: values.id,
+        }}
+        request={list}
+        scroll={{y:window.innerHeight-340}}
+        columns={columns}
+      />
     </Modal>
   );
 };

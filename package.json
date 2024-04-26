@@ -59,9 +59,9 @@
     "querystring": "^0.2.1",
     "rc-menu": "^9.13.0",
     "rc-util": "^5.39.1",
-    "react": "^18.2.0",
+    "react": "^18.3.0",
     "react-dev-inspector": "^2.0.1",
-    "react-dom": "^18.2.0",
+    "react-dom": "^18.3.0",
     "react-helmet-async": "^2.0.4"
   },
   "devDependencies": {
@@ -72,8 +72,8 @@
     "@types/history": "^4.7.11",
     "@types/jest": "^29.5.12",
     "@types/lodash": "^4.17.0",
-    "@types/react": "^18.2.79",
-    "@types/react-dom": "^18.2.25",
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
     "@types/react-helmet": "^6.1.11",
     "@umijs/fabric": "^4.0.1",
     "@umijs/lint": "^4.1.10",
@@ -88,7 +88,7 @@
     "lint-staged": "^15.2.2",
     "mockjs": "^1.1.0",
     "prettier": "^3.2.5",
-    "swagger-ui-dist": "^5.17.1",
+    "swagger-ui-dist": "^5.17.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5",
     "umi-presets-pro": "^2.0.3"
