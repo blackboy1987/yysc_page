@@ -67,6 +67,11 @@ export default [
     component: './optLog',
   },
   {
+    name: 'notice',
+    path: '/notice',
+    component: './notice',
+  },
+  {
     path: '*',
     layout: false,
     component: './404',
