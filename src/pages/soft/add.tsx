@@ -97,11 +97,11 @@ export default () => {
         <Button type='primary' onClick={()=>{
           form.validateFields().then(formValues=>{
             save(formValues).then(result=>{
-              if(result.code){
-                message.success(result.data);
+              if(result.code==0){
+                message.success(result.data).then();
                 form.resetFields()
               }else{
-                message.error("添加失败");
+                message.error("添加失败").then();
               }
             })
           })
