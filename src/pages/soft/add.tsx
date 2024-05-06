@@ -37,10 +37,10 @@ export default () => {
         <Form.Item label='软件大小' name='size' rules={[{required:true,message:'必填'}]}>
           <InputNumber />
         </Form.Item>
-        <Form.Item label='地址1' name='downloadUrl1' rules={[{required:true,message:'必填'}]}>
+        <Form.Item label='地址1' name='downloadUrl' rules={[{required:true,message:'必填'}]}>
           <Input />
         </Form.Item>
-        <Form.Item label='地址2' name='downloadUrl2' rules={[{required:true,message:'必填'}]}>
+        <Form.Item label='地址2' name='downloadUrl1' rules={[{required:true,message:'必填'}]}>
           <Input />
         </Form.Item>
         <Form.Item label='图片1' name='img1' rules={[{required:true,message:'必填'}]}>
@@ -85,11 +85,11 @@ export default () => {
             treeDefaultExpandAll
           />
         </Form.Item>
-        <Form.Item name='content' style={{display:'none'}}>
+        <Form.Item name='introduce' style={{display:'none'}}>
           <Input />
         </Form.Item>
         <MyEditor value='' onChange={content=>{
-            form.setFieldValue("content",content);
+            form.setFieldValue("introduce",content);
           }} />
       </Form>
 
