@@ -62,4 +62,5 @@ export default {
   'menu.signInLog':'签到记录',
   'menu.appVersion':'版本控制',
   'menu.dic':'字典管理',
+  'menu.siteConfig':'网站配置',
 };

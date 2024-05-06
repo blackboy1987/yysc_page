@@ -42,6 +42,15 @@ export default [
     component: './soft',
   },
   {
+    name: 'soft',
+    path: '/soft/add',
+    headerRender: false,
+    footerRender: false,
+    menuRender: false,
+    menuHeaderRender: false,
+    component: './soft/add',
+  },
+  {
     name: 'adConfig',
     path: '/adConfig',
     component: './adConfig',
@@ -65,6 +74,11 @@ export default [
     name: 'optLog',
     path: '/optLog',
     component: './optLog',
+  },
+  {
+    name: 'siteConfig',
+    path: '/siteConfig',
+    component: './siteConfig',
   },
   {
     path: '*',

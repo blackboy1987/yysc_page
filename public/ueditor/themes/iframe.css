@@ -1,0 +1,8 @@
+/*可以在这里添加你自己的css*/
+::selection{
+  background: rgba(37,120,231, 0.2);
+}
+p.error-mark {
+  background: rgba(37,120,231, 0.2);
+  border: #E72545 4px solid;
+}
