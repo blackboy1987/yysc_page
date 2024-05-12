@@ -81,6 +81,11 @@ export default [
     component: './siteConfig',
   },
   {
+    name: 'notice',
+    path: '/notice',
+    component: './notice',
+  },
+  {
     path: '*',
     layout: false,
     component: './404',

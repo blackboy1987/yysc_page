@@ -1,4 +1,4 @@
-import {DatePicker, Form, Input, message, Modal} from 'antd';
+import {DatePicker, Form, Input, message, Modal, Select} from 'antd';
 import React, {useEffect} from 'react';
 import {save} from '../service';
 import moment from "moment";
@@ -35,7 +35,7 @@ const Add: React.FC<AddProps> = ({ open, values, onClose }) => {
       destroyOnClose
       maskClosable={false}
       open={open}
-      title="添加/修改轮播图"
+      title="添加/修改公告"
       onOk={() => {
         form.validateFields().then((formValues) => {
           save(formValues).then((result) => {
@@ -59,6 +59,12 @@ const Add: React.FC<AddProps> = ({ open, values, onClose }) => {
         </Form.Item>
         <Form.Item label="内容" name="content" rules={[{ required: true, message: '必填' }]}>
           <Input.TextArea autoSize={{minRows:8,maxRows:8}} />
+        </Form.Item>
+        <Form.Item label="类型" name="type" rules={[{ required: true, message: '必填' }]}>
+          <Select>
+            <Select.Option value={0}>普通</Select.Option>
+            <Select.Option value={1}>弹框</Select.Option>
+          </Select>
         </Form.Item>
         <Form.Item label="有效时间" name="rangeDate" rules={[{ required: true, message: '必填' }]}>
           <DatePicker.RangePicker format="YYYY-MM-DD" />

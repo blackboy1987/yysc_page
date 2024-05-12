@@ -1,4 +1,4 @@
-import {Card, Col, DatePicker, Form, Input, InputNumber, message, Modal, Row, Switch} from 'antd';
+import {Card, Col, Form, Input, InputNumber, message, Modal, Row, Switch} from 'antd';
 import React, {useEffect} from 'react';
 import {save} from '../service';
 import moment from "moment";
@@ -70,38 +70,23 @@ const Add: React.FC<AddProps> = ({ open, values, onClose }) => {
         </Card>
         <Card title="基础广告配置" size='small' style={{marginBottom:8}}>
           <Row gutter={8}>
-            <Col span={2}>
-              <Form.Item labelCol={{span:12}} label="横幅" name="adType0">
+            <Col span={6}>
+              <Form.Item label="模板信息流" name="adType1">
                 <Switch checkedChildren='开始' unCheckedChildren='关闭' />
               </Form.Item>
             </Col>
-            <Col span={4}>
-              <Form.Item labelCol={{span:15}} label="模板信息流" name="adType1">
+            <Col span={6}>
+              <Form.Item label="插屏广告" name="adType4">
                 <Switch checkedChildren='开始' unCheckedChildren='关闭' />
               </Form.Item>
             </Col>
-            <Col span={4}>
-              <Form.Item labelCol={{span:12}} label="视频信息流" name="adType2">
+            <Col span={6}>
+              <Form.Item label="激励视频" name="adType5">
                 <Switch checkedChildren='开始' unCheckedChildren='关闭' />
               </Form.Item>
             </Col>
-            <Col span={3}>
-              <Form.Item labelCol={{span:12}} label="全屏视频" name="adType3">
-                <Switch checkedChildren='开始' unCheckedChildren='关闭' />
-              </Form.Item>
-            </Col>
-            <Col span={3}>
-              <Form.Item labelCol={{span:14}} label="插屏广告" name="adType4">
-                <Switch checkedChildren='开始' unCheckedChildren='关闭' />
-              </Form.Item>
-            </Col>
-            <Col span={4}>
-              <Form.Item labelCol={{span:14}} label="激励视频" name="adType5">
-                <Switch checkedChildren='开始' unCheckedChildren='关闭' />
-              </Form.Item>
-            </Col>
-            <Col span={4}>
-              <Form.Item labelCol={{span:14}} label="开屏广告" name="adType6">
+            <Col span={6}>
+              <Form.Item label="开屏广告" name="adType6">
                 <Switch checkedChildren='开始' unCheckedChildren='关闭' />
               </Form.Item>
             </Col>
@@ -109,39 +94,48 @@ const Add: React.FC<AddProps> = ({ open, values, onClose }) => {
         </Card>
         <Card title="会员广告配置" size='small' style={{marginBottom:8}}>
           <Row gutter={8}>
-            <Col span={2}>
-              <Form.Item labelCol={{span:12}} label="横幅" name="memberAdType0Count" rules={[{required:true,message:'必填'}]}>
-                <InputNumber min={0} step={1} precision={0} />
+            <Col span={6}>
+              <Form.Item label="模板信息流" name="memberAdType1Count" rules={[{required:true,message:'必填'}]}>
+                <InputNumber min={0} step={1} precision={0} style={{width:'80%'}} />
               </Form.Item>
             </Col>
-            <Col span={4}>
-              <Form.Item labelCol={{span:15}} label="模板信息流" name="memberAdType1Count" rules={[{required:true,message:'必填'}]}>
-                <InputNumber min={0} step={1} precision={0} />
+            <Col span={6}>
+              <Form.Item label="插屏广告" name="memberAdType4Count" rules={[{required:true,message:'必填'}]}>
+                <InputNumber min={0} step={1} precision={0} style={{width:'80%'}} />
               </Form.Item>
             </Col>
-            <Col span={4}>
-              <Form.Item labelCol={{span:12}} label="视频信息流" name="memberAdType2Count" rules={[{required:true,message:'必填'}]}>
-                <InputNumber min={0} step={1} precision={0} />
+            <Col span={6}>
+              <Form.Item label="激励视频" name="memberAdType5Count" rules={[{required:true,message:'必填'}]}>
+                <InputNumber min={0} step={1} precision={0} style={{width:'80%'}} />
               </Form.Item>
             </Col>
-            <Col span={3}>
-              <Form.Item labelCol={{span:12}} label="全屏视频" name="memberAdType3Count" rules={[{required:true,message:'必填'}]}>
-                <InputNumber min={0} step={1} precision={0} />
+            <Col span={6}>
+              <Form.Item label="开屏广告" name="memberAdType6Count" rules={[{required:true,message:'必填'}]}>
+                <InputNumber min={0} step={1} precision={0} style={{width:'80%'}} />
               </Form.Item>
             </Col>
-            <Col span={3}>
-              <Form.Item labelCol={{span:14}} label="插屏广告" name="memberAdType4Count" rules={[{required:true,message:'必填'}]}>
-                <InputNumber min={0} step={1} precision={0} />
+          </Row>
+        </Card>
+        <Card title="游客广告配置" size='small' style={{marginBottom:8}}>
+          <Row gutter={8}>
+            <Col span={6}>
+              <Form.Item label="模板信息流" name="adType1Count" rules={[{required:true,message:'必填'}]}>
+                <InputNumber min={0} step={1} precision={0} style={{width:'80%'}} />
               </Form.Item>
             </Col>
-            <Col span={4}>
-              <Form.Item labelCol={{span:14}} label="激励视频" name="memberAdType5Count" rules={[{required:true,message:'必填'}]}>
-                <InputNumber min={0} step={1} precision={0} />
+            <Col span={6}>
+              <Form.Item label="插屏广告" name="adType4Count" rules={[{required:true,message:'必填'}]}>
+                <InputNumber min={0} step={1} precision={0} style={{width:'80%'}} />
               </Form.Item>
             </Col>
-            <Col span={4}>
-              <Form.Item labelCol={{span:14}} label="开屏广告" name="memberAdType6Count" rules={[{required:true,message:'必填'}]}>
-                <InputNumber min={0} step={1} precision={0} />
+            <Col span={6}>
+              <Form.Item label="激励视频" name="adType5Count" rules={[{required:true,message:'必填'}]}>
+                <InputNumber min={0} step={1} precision={0} style={{width:'80%'}} />
+              </Form.Item>
+            </Col>
+            <Col span={6}>
+              <Form.Item label="开屏广告" name="adType6Count" rules={[{required:true,message:'必填'}]}>
+                <InputNumber min={0} step={1} precision={0} style={{width:'80%'}} />
               </Form.Item>
             </Col>
           </Row>

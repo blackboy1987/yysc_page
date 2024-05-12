@@ -63,4 +63,5 @@ export default {
   'menu.appVersion':'版本控制',
   'menu.dic':'字典管理',
   'menu.siteConfig':'网站配置',
+  'menu.notice':'公告管理',
 };

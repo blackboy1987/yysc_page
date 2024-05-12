@@ -1,23 +1,15 @@
-import {list, remove, tree} from './service';
+import {list, remove} from './service';
 import {PlusOutlined} from '@ant-design/icons';
 import type {ActionType, ProColumns} from '@ant-design/pro-components';
 import {PageContainer, ProTable} from '@ant-design/pro-components';
-import {Button, Card, Col, message, Modal, Row, Tree} from 'antd';
-import React, {useEffect, useRef, useState} from 'react';
+import {Button, Col, message, Modal, Row} from 'antd';
+import React, {useRef, useState} from 'react';
 import Add from './components/Add';
 
 export default () => {
   const actionRef = useRef<ActionType>();
   const [values, setValues] = useState<Record<string, any>>({});
   const [addModalVisible, setAddModalVisible] = useState<boolean>(false);
-  const [data,setData] = useState<Record<string, any>[]>([]);
-  const [parentId,setParentId] = useState<React.Key>(0);
-
-  useEffect(()=>{
-    tree().then(result=>{
-      setData(result.data);
-    })
-  },[])
 
   const handleRemove = (id: number) => {
     Modal.confirm({
@@ -44,7 +36,7 @@ export default () => {
     },
     {
       title: '序号',
-      dataIndex: 'orders',
+      dataIndex: 'order',
       hideInSearch: true,
     },
     {
@@ -87,25 +79,7 @@ export default () => {
   return (
     <PageContainer title={false}>
       <Row gutter={16}>
-        <Col span={4}>
-          <Card size='small'>
-            <Tree
-              style={{height:window.innerHeight-160}}
-              blockNode
-              defaultExpandAll
-              treeData={data}
-              showLine
-              onSelect={e=>{
-                if(e.length>0) {
-                  setParentId(e[0]);
-                }else {
-                  setParentId(0)
-                }
-              }}
-            />
-          </Card>
-        </Col>
-        <Col span={20}>
+        <Col span={24}>
           <ProTable<Record<string, any>, Record<string, any>>
             actionRef={actionRef}
             options={false}
@@ -119,9 +93,6 @@ export default () => {
                 <PlusOutlined /> 新增
               </Button>,
             ]}
-            params={{
-              parentId,
-            }}
             request={list}
             pagination={false}
             scroll={{y:window.innerHeight-220}}

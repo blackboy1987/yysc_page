@@ -32,20 +32,28 @@ export default () => {
   };
   const columns: ProColumns<Record<string, any>>[] = [
     {
-      title: '图片',
-      dataIndex: 'image',
-      valueType:'image',
+      title: '标题',
+      dataIndex: 'title',
       hideInSearch: true,
-      fieldProps:{
-        width:100
-      }
     },
     {
-      title: '跳转地址',
-      dataIndex: 'url',
+      title: '内容',
+      dataIndex: 'content',
       hideInSearch: true,
-      width: 80,
-      renderText:(text,record)=><a href={record.url} target="_blank" rel="noreferrer">查看</a>
+    },
+    {
+      title: '类型',
+      dataIndex: 'type',
+      hideInSearch: true,
+      width: 50,
+      valueEnum:{
+        0:{
+          text:'普通'
+        },
+        1:{
+          text:'弹窗'
+        }
+      }
     },
     {
       title: '有效时间',
@@ -53,12 +61,6 @@ export default () => {
       hideInSearch: true,
       width:180,
       renderText:(_,record)=><span>{moment(record.beginDate).format("YYYY-MM-DD")}~{moment(record.endDate).format("YYYY-MM-DD")}</span>
-    },
-    {
-      title: '序号',
-      dataIndex: 'order',
-      hideInSearch: true,
-      width:50,
     },
     {
       title: '操作',
