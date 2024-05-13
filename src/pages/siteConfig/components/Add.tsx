@@ -5,7 +5,7 @@ import moment from "moment";
 
 const layout = {
   labelCol: {
-    span: 4,
+    span: 6,
   },
   wrapperCol: {
     span: 18,
