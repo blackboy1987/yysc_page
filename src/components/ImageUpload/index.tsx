@@ -1,5 +1,5 @@
 import type {UploadProps} from 'antd';
-import {message, Upload} from 'antd';
+import {Button, message, Upload} from 'antd';
 import {Constants} from "@/util/constants";
 import React from "react";
 
@@ -15,7 +15,7 @@ const ImageUpload:React.FC<ImageUploadProps> = ({onSuccess}) =>{
     action: Constants.uploadUrl,
     showUploadList: false,
     headers: {
-      // token: localStorage.getItem("token")||'',
+      token: localStorage.getItem("token")||'',
     },
     onChange(info) {
       if (info.file.status !== 'uploading') {
@@ -32,7 +32,7 @@ const ImageUpload:React.FC<ImageUploadProps> = ({onSuccess}) =>{
 
   return (
     <Upload {...props}>
-      <span style={{color:'#ffffff'}}>选择文件</span>
+      <span style={{cursor:'pointer'}}>选择文件</span>
     </Upload>
   )
 }

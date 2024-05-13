@@ -23,20 +23,8 @@ export default [
     ],
   },
   {
-    path: '/welcome',
-    name: 'welcome',
-    icon: 'smile',
-    component: './Welcome',
-  },
-  {
-    name: 'list.table-list',
-    icon: 'table',
-    path: '/list',
-    component: './TableList',
-  },
-  {
     path: '/',
-    redirect: '/welcome',
+    redirect: '/carousel',
   },
   {
     name: 'carousel',
@@ -52,6 +40,15 @@ export default [
     name: 'soft',
     path: '/soft',
     component: './soft',
+  },
+  {
+    name: 'soft',
+    path: '/soft/add',
+    headerRender: false,
+    footerRender: false,
+    menuRender: false,
+    menuHeaderRender: false,
+    component: './soft/add',
   },
   {
     name: 'adConfig',
@@ -79,34 +76,14 @@ export default [
     component: './optLog',
   },
   {
-    name: 'pointLog',
-    path: '/pointLog',
-    component: './pointLog',
+    name: 'siteConfig',
+    path: '/siteConfig',
+    component: './siteConfig',
   },
   {
-    name: 'review',
-    path: '/review',
-    component: './review',
-  },
-  {
-    name: 'setting',
-    path: '/setting',
-    component: './setting',
-  },
-  {
-    name: 'signInLog',
-    path: '/signInLog',
-    component: './signInLog',
-  },
-  {
-    name: 'appVersion',
-    path: '/appVersion',
-    component: './appVersion',
-  },
-  {
-    name: 'dic',
-    path: '/dic',
-    component: './dic',
+    name: 'notice',
+    path: '/notice',
+    component: './notice',
   },
   {
     path: '*',

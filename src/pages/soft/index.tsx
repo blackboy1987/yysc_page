@@ -1,10 +1,22 @@
-import {list, remove, tree,audit} from './service';
-import {PlusOutlined} from '@ant-design/icons';
+import {audit, list, remove, tree} from './service';
+import {
+  CheckOutlined,
+  CloseOutlined,
+  DeleteOutlined,
+  DownloadOutlined,
+  EditOutlined,
+  EyeOutlined,
+  PlusOutlined
+} from '@ant-design/icons';
 import type {ActionType, ProColumns} from '@ant-design/pro-components';
 import {PageContainer, ProTable} from '@ant-design/pro-components';
 import {Button, Card, Col, message, Modal, Row, Tree} from 'antd';
 import React, {useEffect, useRef, useState} from 'react';
 import Add from './components/Add';
+import DownloadLog from "@/pages/soft/components/DownloadLog";
+import view from "@/pages/signInLog/components/View";
+import SoftViewLog from "@/pages/softViewLog";
+import ViewLog from "@/pages/soft/components/ViewLog";
 
 export default () => {
   const actionRef = useRef<ActionType>();
@@ -12,6 +24,8 @@ export default () => {
   const [addModalVisible, setAddModalVisible] = useState<boolean>(false);
   const [data,setData] = useState<Record<string, any>[]>([]);
   const [categoryId,setCategoryId] = useState<React.Key | null>(null);
+  const [downloadLogModalVisible, setDownloadLogModalVisible] = useState<boolean>(false);
+  const [viewLogModalVisible, setViewLogModalVisible] = useState<boolean>(false);
 
   useEffect(()=>{
     tree().then(result=>{
@@ -119,46 +133,18 @@ export default () => {
       valueType: 'option',
       render: (_, record) => {
         const array = [];
-        array.push(<Button
-          key="edit"
-          size="small"
-          type="primary"
-          onClick={() => {
-            setAddModalVisible(true);
-            setValues(record);
-          }}
-        >
-          修改
-        </Button>);
-        array.push(<Button
-          key="remove"
-          size="small"
-          type="primary"
-          danger
-          onClick={() => handleRemove(record.id)}
-        >
-          删除
-        </Button>)
-        if(record.status==0 || record.status==2){
-          array.push((record.status==0 || record.status == 2) && <Button
-            key="pass"
-            size="small"
-            type="primary"
-            onClick={() => handleAudit(record.id,1)}
-          >
-            通过
-          </Button>)
+        array.push(<Button key="edit" size="small" type="primary" onClick={() => {setAddModalVisible(true);setValues(record);}} icon={<EditOutlined />}/>);
+        array.push(<Button key="remove" size="small" type="primary" danger onClick={() => handleRemove(record.id)} icon={<DeleteOutlined />}/>)
+        if(record.status==0){
+          array.push(<Button key="pass" size="small" type="primary" onClick={() => handleAudit(record.id,1)} icon={<CheckOutlined />}/>)
+          array.push(<Button key="reject" size="small" type="primary" danger onClick={() => handleAudit(record.id,2)} icon={<CloseOutlined />}/>)
+        }else if(record.status==1){
+          array.push(<Button key="reject" size="small" type="primary" danger onClick={() => handleAudit(record.id,2)} icon={<CloseOutlined />}/>)
         }else{
-          array.push((record.status==0 || record.status == 2) && <Button
-            key="reject"
-            size="small"
-            type="primary"
-            danger
-            onClick={() => handleAudit(record.id,2)}
-          >
-            拒绝
-          </Button>)
+          array.push(<Button key="pass" size="small" type="primary" onClick={() => handleAudit(record.id,1)} icon={<CheckOutlined />}/>)
         }
+        array.push(<Button key="edit" size="small" type="primary" onClick={() => {setViewLogModalVisible(true);setValues(record);}} icon={<EyeOutlined />}/>);
+        array.push(<Button key="edit" size="small" type="primary" onClick={() => {setDownloadLogModalVisible(true);setValues(record);}} icon={<DownloadOutlined />}/>);
         return array;
       },
     },
@@ -214,6 +200,26 @@ export default () => {
           onClose={() => {
             setAddModalVisible(false);
             actionRef.current?.reload();
+            setValues({});
+          }}
+        />
+      ) : null}
+      {downloadLogModalVisible && Object.keys(values).length>0 ? (
+        <DownloadLog
+          values={values}
+          open={downloadLogModalVisible}
+          onClose={() => {
+            setDownloadLogModalVisible(false);
+            setValues({});
+          }}
+        />
+      ) : null}
+      {viewLogModalVisible && Object.keys(values).length>0 ? (
+        <ViewLog
+          values={values}
+          open={viewLogModalVisible}
+          onClose={() => {
+            setViewLogModalVisible(false);
             setValues({});
           }}
         />

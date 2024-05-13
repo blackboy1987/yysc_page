@@ -1,6 +1,7 @@
 ﻿import type { RequestOptions } from '@@/plugin-request/request';
 import type { RequestConfig } from '@umijs/max';
 import { message, notification } from 'antd';
+// @ts-ignore
 import qs from 'qs';
 
 // 错误处理方案： 错误类型
@@ -99,7 +100,7 @@ export const errorConfig: RequestConfig = {
         headers: {
           ...headers,
           'content-type': 'application/x-www-form-urlencoded',
-          // token: localStorage.getItem('token') || '',
+          token: localStorage.getItem('token') || '',
         },
         withCredentials: true,
         data: qs.stringify(config.data || {}),
